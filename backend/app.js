@@ -8,7 +8,7 @@ const indexRouter = require("./routes/index");
 const restaurantsModule = require("./routes/restaurants");
 const restaurantsRouter = restaurantsModule.router;
 
-const starredRestaurantsRouter = require("./routes/starredRestaurants")
+const starredRestaurantsRouter = require("./routes/starredRestaurants");
 
 const cors = require("cors");
 

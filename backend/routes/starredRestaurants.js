@@ -59,7 +59,7 @@ router.get("/:id", (req, res) => {
     }
     
     res.send(restaurant);
-}
+});
 
 
 /**
@@ -90,20 +90,50 @@ router.post("/", (req, res) => {
         id: newStarredRestaurant.id,
         comment: newStarredRestaurant.comment,
         name: restaurant.name
-    };
+    });
 
-}
+});
 
 
 /**
  * Feature 9: Deleting from your list of starred restaurants.
  */
+router.delete("/:id", (req, res) => {
+    const { id } = req.params;
 
+    newRestaurants = STARRED_RESTAURANTS.filter(
+        (restaurant) => restaurant.id !== id
+    );
+
+    if (newRestaurants.length === STARRED_RESTAURANTS.length) {
+        res.sendStatus(404);
+        return;
+    }
+
+    STARRED_RESTAURANTS = newRestaurants;
+
+    res.send(200);
+});
 
 /**
  * Feature 10: Updating your comment of a starred restaurant.
  */
 
+router.put("/:id", (req, res) => {
+    const { id } = req.params;
+    const { newName } = req.params;
 
+    restaurant = STARRED_RESTAURANTS.find((restaurant) => restaurant.id === id);
+
+    if (!restaurant) {
+        res.sendStatus(404);
+        return 
+    }
+
+    restaurant.name = newName;
+
+    res.sendStatus(200);
+    return;
+});
 
 module.exports = router;
